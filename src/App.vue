@@ -1,13 +1,16 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div>
-    <h1>You did it!</h1>
-    <p>dvdvdf</p>
-  </div>
+    <div>
+        <WelcomeScreen />
+    </div>
 </template>
 
-<style scoped>
+<script setup lang="ts">
+import WelcomeScreen from './components/WelcomeScreen.vue'
+
+
+</script>
+
+<style scoped lang="scss">
 p {
     color: green;
 }
