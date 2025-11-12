@@ -1,6 +1,6 @@
 <template>
-    <div class="root">
-        <div ref="layer" class="layer">
+    <main class="wrapper">
+        <section  ref="layer" class="layer">
             <div class="texts">
                 <div class="title">
                     <h1>Розпочніть подорож в</h1>
@@ -11,17 +11,17 @@
                     <p>прямо зараз</p>
                 </div>
             </div>
-            <img src="/images/plane.webp" alt="plane" class="plane">
-        </div>
+            <img src="/images/plane.webp" alt="An airplane symbolizing a trip to Iceland" class="plane">
+        </section>
         <div class="bg bg-1"></div>
-        <div class="welcome-block">
+        <section class="welcome-block">
             <p class="welcome-text">
                 Welcome to
                 <span class="transparent-text">Iceland</span>
             </p>
-        </div>
+        </section>
         <div class="bg bg-2"></div>
-    </div>
+    </main>
 </template>
 
 <script setup lang="ts">
@@ -31,7 +31,6 @@ const layer = ref<null | HTMLElement>(null);
 
 const movePlane = () => {
     const scrollY = window.scrollY;
-
     if(layer.value) {
         layer.value.style.left = `${scrollY}px`;
     }
@@ -50,7 +49,7 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 @use '../assets/styles/variables' as *;
 
-.root {
+.wrapper {
     font-family: "Poppins", sans-serif;
     color: $palette-white;
     background-color: $palette-bgcolor;
@@ -62,6 +61,7 @@ onUnmounted(() => {
     height: 100vh;
     width: 100%;
     background-color: $palette-bgcolor;
+    height: 100%;
 }
 
 .plane {
@@ -69,6 +69,7 @@ onUnmounted(() => {
     position: absolute;
     z-index: 2;
     left: -50vh;
+    height: 100%;
 }
 
 .texts {
@@ -78,10 +79,11 @@ onUnmounted(() => {
     transform: translate(-50%, -50%);
     h1, .content, p {    
         font-family: "Roboto", sans-serif;
-        font-size: 44px;
+        font-size: clamp(26px, 3.33vw, 64px);
         font-weight: 700;
         letter-spacing: 0.05em;
         text-align: center;
+        line-height: 0.7;
     }
 }
 
@@ -109,7 +111,7 @@ onUnmounted(() => {
 }
 
 .welcome-text {
-    font-size: 3em;
+    font-size: clamp(20px, 1.875vw, 36px);
     font-weight: 200;
     letter-spacing: 0.25em;
     line-height: 2.5em;
@@ -118,7 +120,7 @@ onUnmounted(() => {
 }
 
 .transparent-text {
-    font-size: 4em;
+    font-size: clamp(26px, 3.33vw, 64px);
     font-weight: 900;
     letter-spacing: 0;
     background: url('../images/bg1.webp');
@@ -134,7 +136,7 @@ onUnmounted(() => {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 120px;
+    font-size: clamp(48px, 6.25vw, 120px);
     color: transparent;
 }
  
@@ -157,6 +159,43 @@ onUnmounted(() => {
     } 
     50% {
         clip-path: polygon(0 49%, 5% 53%, 11% 57%, 16% 59%, 28% 64%, 38% 57%, 41% 58%, 48% 56%, 54% 58%, 64% 62%, 71% 66%, 79% 68%, 86% 66%, 92% 64%, 100% 62%, 100% 100%, 0% 100%)
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .plane {
+        left: -60vh;
+    }
+}
+
+
+@media (max-width: 860px) {
+    .texts {
+        top: 25%;
+        h1, .content, p {
+            line-height: 1;
+        }
+    }
+    .plane {
+        left: -60vh;
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .layer {
+        height: 100vh;
+        height: 100dvh;
+    }
+
+    .plane {
+        height: 100vh;
+        height: 100dvh;
     }
 }
 </style>
